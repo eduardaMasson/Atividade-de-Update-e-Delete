@@ -1,0 +1,95 @@
+/* 1 */
+
+UPDATE paciente
+SET peso = 8.5 WHERE ID_PACIENTE = 1;
+
+
+
+/* 2 */
+
+UPDATE MEDICAMENTOS 
+SET ESTOQUE = 50 WHERE ID_MEDICAMENTO = 3;
+
+
+
+/* 3 */
+
+UPDATE TUTOR 
+SET DATA_NASCIMENTO = '2001-05-15' WHERE ID_TUTOR = 2;
+
+
+
+/* 4 */
+
+UPDATE AGENDAMENTO 
+SET MOTIVO = 'Dor de barriga severa' WHERE ID_AGENDAMENTO = 5;
+
+
+
+/* 5 */
+
+UPDATE MEDICAMENTOS 
+SET DESCRICAO = 'Anti-inflamatório para articulações' WHERE ID_MEDICAMENTO = 6;
+
+
+
+/* 6 */
+
+UPDATE TUTOR 
+SET NOME = 'Maria Oliveira' WHERE ID_TUTOR = 3;
+
+
+
+/* 7 */
+
+UPDATE MEDICAMENTOS 
+SET DESCRICAO = 'Aplicar no olho afetado a cada 4 horas' WHERE ID_MEDICAMENTO = 2;
+
+
+
+/* 8 */
+
+UPDATE TUTOR 
+SET ENDERECO = 'Rua dos Girassóis, 123' WHERE ID_TUTOR = 4;
+
+
+
+/* 9 */
+
+DELETE FROM AGENDAMENTO WHERE id_agendamento = 7;
+
+
+
+/* 10 */
+
+DELETE FROM MEDICAMENTOS WHERE id_medicamento = 8;
+
+
+
+/* 11 */
+
+DELETE FROM PACIENTE p WHERE p.id_tutor = 5;
+
+DELETE FROM AGENDAMENTO a WHERE a.id_paciente IN (SELECT p.id_paciente FROM paciente p WHERE p.id_tutor = 5);
+
+DELETE FROM receita r WHERE r.id_agendamento = (SELECT a.id_agendamento FROM agendamento a WHERE a.id_paciente IN (SELECT p.id_tutor FROM paciente p WHERE p.id_tutor = 5));
+
+
+
+/* 12 */
+
+DELETE FROM ITENSRECEITA i WHERE ID_RECEITA IN (SELECT ID_AGENDAMENTO FROM AGENDAMENTO WHERE ID_AGENDAMENTO = 0);
+
+DELETE FROM RECEITA i WHERE i.ID_AGENDAMENTO NOT IN (SELECT i.ID_AGENDAMENTO FROM AGENDAMENTO WHERE ID_AGENDAMENTO = ID_AGENDAMENTO);
+
+
+
+/* 13 */
+
+DELETE FROM TUTOR WHERE data_nascimento < '1987-01-01';
+
+
+
+/* 14 */
+
+DELETE FROM ITENSRECEITA WHERE id_receita BETWEEN 7 AND 9;
